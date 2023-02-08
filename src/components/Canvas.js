@@ -55,7 +55,7 @@ const Canvas = () => {
 
   const onConnect = useCallback((params) => {
     const { targetHandle, sourceHandle } = params;
-    setEdges(eds => eds.find(edge => edge.sourceHandle === sourceHandle || edge.targetHandle === targetHandle) ? eds : addEdge({...params, type: 'smoothstep'}, eds));
+    setEdges(eds => eds.find(edge => edge.sourceHandle === sourceHandle || edge.targetHandle === targetHandle) ? eds : addEdge({...params, type: 'straight'}, eds));
   }, [setEdges]);
 
   const onDragOver = useCallback((event) => {
