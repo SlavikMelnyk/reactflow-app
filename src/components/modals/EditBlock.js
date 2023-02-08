@@ -13,7 +13,7 @@ const EditBlockModal = ({ element, onSave, onCancel }) => {
     const [newPortLabel, setNewPortLabel] = useState('');
 
     const setPortProperty = (portId, property, value) => {
-        setPorts(prev => prev.map(port => port.id === portId ? { ...port, [property]: value } : port));
+        setPorts(prev => prev.map(port => port.portId === portId ? { ...port, [property]: value } : port));
     }
     const handleAddPort = useCallback(() => {
         const newPort = { portId: nextId('port-'), type: newPortType, label: newPortLabel };
