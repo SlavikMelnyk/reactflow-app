@@ -49,7 +49,7 @@ const Canvas = () => {
     const removedNode = prevNodes.find(n => !nodes.find(el => el.blockId === n.blockId));
     if(!removedNode) return;
     if(removedNode.type === 'colorPicker') {
-      removedNode?.onChange();
+      removedNode.data?.onChange();
     }
   }, [nodes, prevNodes]);
 
