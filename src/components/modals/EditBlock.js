@@ -47,7 +47,7 @@ const EditBlockModal = ({ element, onSave, onCancel }) => {
                             <h3 className='mb-0 font-bold mt-3'>Port {i+1}:</h3>
                             <div className='flex h-8'>
                                 <p className='w-16'>Type:</p>
-                                <select className='rounded-lg bg-[#666666] px-1 text-[#eeeeee] w-32 h-8' value={type} name='type' onChange={e => setPortProperty(id, 'type', e.target.value)}>
+                                <select className='rounded-lg bg-[#666666] px-1 text-[#eeeeee] w-32 h-8' value={type} name='type' onChange={e => setPortProperty(portId, 'type', e.target.value)}>
                                     <option value={portTypes.target}>{portTypes.target}</option>
                                     <option value={portTypes.source}>{portTypes.source}</option>
                                 </select>
