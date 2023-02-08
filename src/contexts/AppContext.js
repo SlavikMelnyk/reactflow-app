@@ -5,7 +5,7 @@ import nextId from 'react-id-generator';
 const AppContext = createContext();
 
 const getInitialBlocks = ({setCanvasBgColor, setNodesBgColor, setIsDarkTheme}) => [
-  { blockId: nextId('node-'), sourcePosition: 'right', targetPosition: 'left', type: 'custom', data: { label: 'Custom Node', ports: [{type: portTypes.target, label: 'some nice port'}, {type: portTypes.source}] } },
+  { blockId: nextId('node-'), sourcePosition: 'right', targetPosition: 'left', type: 'custom', data: { label: 'Custom Node', ports: [{portId: nextId('port-'), type: portTypes.target, label: 'some nice port'}, {portId: nextId('port-'), type: portTypes.source}] } },
   { blockId: nextId('node-'), sourcePosition: 'right', targetPosition: 'left', type: 'colorPicker', data: { label: 'Canvas bg color', onChange: setCanvasBgColor, defaultValue: INITIAL_CANVAS_BG_COLOR } },
   { blockId: nextId('node-'), sourcePosition: 'right', targetPosition: 'left', type: 'colorPicker', data: { label: 'Nodes bg color', onChange: setNodesBgColor, defaultValue: INITIAL_NODE_BG_COLOR } },
   { blockId: nextId('node-'), sourcePosition: 'right', targetPosition: 'left', type: 'checkbox', data: { label: 'Theme', onChange: setIsDarkTheme, defaultValue: false } },
