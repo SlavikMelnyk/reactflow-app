@@ -16,13 +16,13 @@ const EditBlockModal = ({ element, onSave, onCancel }) => {
         setPorts(prev => prev.map(port => port.id === portId ? { ...port, [property]: value } : port));
     }
     const handleAddPort = useCallback(() => {
-        const newPort = { type: newPortType, label: newPortLabel };
+        const newPort = { portId: nextId('port-'), type: newPortType, label: newPortLabel };
         setPorts(prev => prev.concat(newPort));
         setNewPortLabel('');
     }, [newPortType, newPortLabel]);
 
     const handleRemovePort = useCallback((portId) => {
-        setPorts(prev => prev.filter(p => p.id !== portId));
+        setPorts(prev => prev.filter(p => p.portId !== portId));
     }, []);
 
     const handleSave = useCallback(() => {
@@ -42,8 +42,8 @@ const EditBlockModal = ({ element, onSave, onCancel }) => {
                 />
                 {!isCustomNodeType(element.type) ? null : (
                 <>
-                    {ports.map(({id, type, label}, i) => (
-                        <div key={id}>
+                    {ports.map(({portId, type, label}, i) => (
+                        <div key={portId}>
                             <h3 className='mb-0 font-bold mt-3'>Port {i+1}:</h3>
                             <div className='flex h-8'>
                                 <p className='w-16'>Type:</p>
@@ -56,11 +56,11 @@ const EditBlockModal = ({ element, onSave, onCancel }) => {
                                     type='text'
                                     placeholder='Port label:'
                                     value={label}
-                                    onChange={(e) => setPortProperty(id, 'label', e.target.value)}
+                                    onChange={(e) => setPortProperty(portId, 'label', e.target.value)}
                                 />
                                 <button
                                     className='px-4 py-1 ml-4 text-base bg-gray-400 text-white rounded-lg'
-                                    onClick={() => handleRemovePort(id)}
+                                    onClick={() => handleRemovePort(portId)}
                                 >
                                     <FaMinusCircle />
                                 </button>
