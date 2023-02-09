@@ -23,7 +23,7 @@ const Output = ({visible, hide, nodes, edges}) => {
     return (
         <aside className={`absolute transition-all duration-300 ease-in-out ${visible ? 'right-0' : '-right-80'} text-gray-700 z-10 h-full overflow-scroll w-72 border-l ${isDarkTheme ? '!bg-black' : '!bg-white'}`}>
             <FaRegTimesCircle onClick={hide} className='cursor-pointer absolute top-4 right-4 h-8 w-8' />
-            <p className='text-xl relative top-4 mb-2 font-bold'>Output:</p>
+            <p className='text-xl relative top-4 mb-2 font-bold w-fit'>Output:</p>
             <div className='h-3/4 relative top-4 overflow-scroll text-gray-600'>
                 <ReactJson src={outputObject} name={false} theme='ashes' displayDataTypes={false} />
             </div>
