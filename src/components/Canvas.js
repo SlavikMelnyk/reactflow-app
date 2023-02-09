@@ -16,7 +16,7 @@ import nextId from 'react-id-generator';
 import Output from './output-bar/Output';
 
 const Canvas = () => {
-  const { allBlocks, getBlockByBlockId, canvasBgColor, nodesBgColor } = useContext(AppContext);
+  const { allBlocks, getBlockByBlockId, canvasBgColor, nodesBgColor, pastedOutputNodes } = useContext(AppContext);
   const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const prevNodes = usePrevious(nodes);
@@ -43,6 +43,13 @@ const Canvas = () => {
         }
     }));
   }, [allBlocks, nodesBgColor, setNodes]);
+
+  useEffect(() => {
+    const newEdges = [];
+    pastedOutputNodes.forEach(node => (node.edges || []).forEach(edge => newEdges.find(edg => edg.id === edge.id) ? null : newEdges.push(edge)));
+    setNodes(pastedOutputNodes);
+    setEdges(newEdges);
+  }, [pastedOutputNodes, setNodes, setEdges]);
 
   useEffect(() => {
     if(!prevNodes || !prevNodes.length || nodes.length >= prevNodes.length) return;
