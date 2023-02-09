@@ -31,3 +31,7 @@ export const getTypeColor = type => {
 const defaultTypes = ['input', 'output', 'default', 'group'];
 
 export const isCustomNodeType = type => !defaultTypes.includes(type);
+
+export const shareOnDnd = {
+    nodeId: 'reactflow/blockId',
+};
