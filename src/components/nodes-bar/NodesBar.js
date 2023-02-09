@@ -28,7 +28,7 @@ const NodesBar = () => {
   }
 
   return (
-    <aside className={`w-64 border-r transition-all duration-300 ease-in-out ${isDarkTheme ? '!bg-black' : '!bg-white'}`}>
+    <aside className={`w-64 border-r transition-all duration-300 ease-in-out h-full overflow-scroll ${isDarkTheme ? '!bg-black' : '!bg-white'}`}>
       <SearchBar onSearch={setSearchValue} />
       {Object.keys(structuredBlocks).map(type => (
         <div className='my-5' key={type}>
