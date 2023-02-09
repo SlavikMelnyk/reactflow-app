@@ -1,5 +1,5 @@
 import { AppContext } from '@/contexts/AppContext';
-import { getTypeColor } from '@/utils/consts';
+import { getTypeColor, shareOnDnd } from '@/utils/consts';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { FaEdit } from 'react-icons/fa';
 import EditBlockModal from '../modals/EditBlock';
@@ -18,7 +18,7 @@ const NodesBar = () => {
   }, [allBlocks, searchValue]);
 
   const onDragStart = (event, node) => {
-    event.dataTransfer.setData('reactflow/blockId', node.blockId);
+    event.dataTransfer.setData(shareOnDnd.nodeId, node.blockId);
     event.dataTransfer.effectAllowed = 'move';
   };
 
