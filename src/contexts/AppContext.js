@@ -14,7 +14,7 @@ const AppContextProvider = ({ children }) => {
     const getBlockByBlockId = useCallback(blockId => allBlocks.find(b => b.blockId === blockId), [allBlocks]);
 
     const updateBlock = useCallback(updatedBlock => {
-      if(!updateBlock.blockId) {
+      if(!updatedBlock.blockId) {
         setAllBlocks(prev => [...prev, {...updatedBlock, ...blockPortDefaults, blockId: nextId(idPrefixes.node)}]);
       }
       setAllBlocks(prev => prev.map(block => block.blockId === updatedBlock.blockId ? {...updatedBlock} : block));
