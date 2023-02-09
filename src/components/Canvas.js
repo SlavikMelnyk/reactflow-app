@@ -58,7 +58,7 @@ const Canvas = () => {
     setEdges(eds =>
       eds.find(edge =>
         (edge.sourceHandle === sourceHandle && edge.source === source) || (targetHandle && edge.targetHandle === targetHandle && edge.target === target))
-        ? eds : addEdge({...params, type: 'straight'}, eds)
+        ? eds : addEdge({...params, animated: true, type: 'straight'}, eds)
     );
   }, [setEdges]);
 
