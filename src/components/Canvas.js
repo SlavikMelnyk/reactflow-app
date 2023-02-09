@@ -10,7 +10,7 @@ import ReactFlow, {
 import 'reactflow/dist/style.css';
 import NodesBar from '@/components/nodes-bar/NodesBar';
 import { AppContext } from '@/contexts/AppContext';
-import { customNodeTypes, INITIAL_CANVAS_BG_COLOR, getTypeColor } from '@/utils/consts';
+import { customNodeTypes, INITIAL_CANVAS_BG_COLOR, getTypeColor, shareOnDnd } from '@/utils/consts';
 import { usePrevious } from '@/utils/hooks/usePrevious';
 import nextId from 'react-id-generator';
 import Output from './output-bar/Output';
@@ -70,7 +70,7 @@ const Canvas = () => {
     event.preventDefault();
 
     const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
-    const node = getBlockByBlockId(event.dataTransfer.getData('reactflow/blockId'));
+    const node = getBlockByBlockId(event.dataTransfer.getData(shareOnDnd.nodeId));
 
     if (typeof node === 'undefined' || !node) {
       return;
