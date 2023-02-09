@@ -45,7 +45,7 @@ const Canvas = () => {
   }, [allBlocks, nodesBgColor, setNodes]);
 
   useEffect(() => {
-    if(!prevNodes || nodes.length >= prevNodes.length) return;
+    if(!prevNodes || !prevNodes.length || nodes.length >= prevNodes.length) return;
     const removedNode = prevNodes.find(n => !nodes.find(el => el.blockId === n.blockId));
     if(!removedNode) return;
     if(removedNode.type === 'colorPicker') {
@@ -54,8 +54,12 @@ const Canvas = () => {
   }, [nodes, prevNodes]);
 
   const onConnect = useCallback((params) => {
-    const { targetHandle, sourceHandle } = params;
-    setEdges(eds => eds.find(edge => edge.sourceHandle === sourceHandle || edge.targetHandle === targetHandle) ? eds : addEdge({...params, type: 'straight'}, eds));
+    const { targetHandle, sourceHandle, source, target } = params;
+    setEdges(eds =>
+      eds.find(edge =>
+        (edge.sourceHandle === sourceHandle && edge.source === source) || (targetHandle && edge.targetHandle === targetHandle && edge.target === target))
+        ? eds : addEdge({...params, type: 'straight'}, eds)
+    );
   }, [setEdges]);
 
   const onDragOver = useCallback((event) => {
