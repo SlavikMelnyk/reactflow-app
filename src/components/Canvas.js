@@ -6,6 +6,7 @@ import ReactFlow, {
   useEdgesState,
   Controls,
   Background,
+  MiniMap,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import NodesBar from '@/components/nodes-bar/NodesBar';
@@ -99,7 +100,7 @@ const Canvas = () => {
         ...node.data,
         ports: (node.data.ports || []).map(p => ({ ...p, id: nextId(p.portId)})),
       },
-      id: nextId(node.blockId),
+      id: nextId(node.blockId+Math.floor(Math.random()*10)),
       position,
       style: {
         background: nodesBgColor || getTypeColor(node.type),
@@ -120,7 +121,7 @@ const Canvas = () => {
         </button>
         <button
           onClick={() => setNodes([])}
-          className={`absolute transition-all duration-300 ease-in-out left-72 top-4 bg-black font-bold border border-white z-10 py-2 px-8 text-white bg-gray-500 rounded-lg`}
+          className={`absolute transition-all duration-300 ease-in-out left-72 top-4 font-bold border border-white z-10 py-2 px-8 text-white bg-gray-500 rounded-lg`}
         >
           Clear
         </button>
@@ -141,6 +142,7 @@ const Canvas = () => {
           >
             <Controls />
             <Background variant='dots' />
+            <MiniMap />
           </ReactFlow>
         </div>
       </ReactFlowProvider>

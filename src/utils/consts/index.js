@@ -3,6 +3,7 @@ import ThemeNode from '@/components/custom-nodes/nodes/ThemeNode';
 import BgColorNode from '@/components/custom-nodes/nodes/BgColorNode';
 import NodesColorNode from '@/components/custom-nodes/nodes/NodesColorNode';
 import nextId from 'react-id-generator';
+import CustomEdge from '@/components/custom-nodes/types/CustomEdge';
 export const INITIAL_CANVAS_BG_COLOR = '#000000';
 export const INITIAL_NODE_BG_COLOR = '#eeeeee';
 
@@ -11,6 +12,10 @@ export const customNodeTypes = {
     canvasColor: BgColorNode,
     nodesColor: NodesColorNode,
     themeColor: ThemeNode,
+}
+
+export const customEdgeTypes = {
+    customEdge: CustomEdge,
 }
 
 export const portTypes = {

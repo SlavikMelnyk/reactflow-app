@@ -6,7 +6,7 @@ const SearchBar = ({ onSearch }) => (
             <FaSearch className='h-5 w-5 text-gray-500' />
         </div>
         <input
-            className='form-input py-3 text-base pl-10 block w-full rounded-md transition duration-150 ease-in-out bg-gray rounded-md'
+            className='form-input py-3 text-base pl-10 block w-full transition duration-150 ease-in-out bg-gray rounded-md'
             placeholder='Search for blocks'
             onChange={e => onSearch(e.target.value)}
         />
