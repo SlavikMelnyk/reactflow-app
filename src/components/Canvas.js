@@ -11,7 +11,7 @@ import ReactFlow, {
 import 'reactflow/dist/style.css';
 import NodesBar from '@/components/nodes-bar/NodesBar';
 import { AppContext } from '@/contexts/AppContext';
-import { customNodeTypes, INITIAL_CANVAS_BG_COLOR, getTypeColor, shareOnDnd } from '@/utils/consts';
+import { customNodeTypes, INITIAL_CANVAS_BG_COLOR, getTypeColor, shareOnDnd, customEdgeTypes } from '@/utils/consts';
 import { usePrevious } from '@/utils/hooks/usePrevious';
 import nextId from 'react-id-generator';
 import Output from './output-bar/Output';
@@ -135,6 +135,7 @@ const Canvas = () => {
             onConnect={onConnect}
             style={{ backgroundColor: canvasBgColor || INITIAL_CANVAS_BG_COLOR }}
             nodeTypes={customNodeTypes}
+            edgeTypes={customEdgeTypes}
             onInit={setReactFlowInstance}
             onDrop={onDrop}
             onDragOver={onDragOver}

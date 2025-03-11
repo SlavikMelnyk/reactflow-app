@@ -15,7 +15,7 @@ export const customNodeTypes = {
 }
 
 export const customEdgeTypes = {
-    customEdge: CustomEdge,
+    custom: CustomEdge,
 }
 
 export const portTypes = {
@@ -53,7 +53,7 @@ export const shareOnDnd = {
 
 export const blockPortDefaults = { sourcePosition: 'right', targetPosition: 'left' };
 export const getInitialBlocks = () => [
-    { blockId: nextId(idPrefixes.node), ...blockPortDefaults, type: 'custom', data: { label: 'Custom Node', ports: [{portId: nextId(idPrefixes.port), type: portTypes.target, label: 'some nice port'}, {portId: nextId(idPrefixes.port), type: portTypes.source}] } },
+    { blockId: nextId(idPrefixes.node), ...blockPortDefaults, type: 'custom', data: { label: 'Custom Node', ports: [{portId: nextId(idPrefixes.port), type: portTypes.target, label: 'target 1'}, {portId: nextId(idPrefixes.port), type: portTypes.source, label: 'source 1'}] } },
     { blockId: nextId(idPrefixes.node), ...blockPortDefaults, type: 'canvasColor', data: { label: 'Canvas bg color' } },
     { blockId: nextId(idPrefixes.node), ...blockPortDefaults, type: 'nodesColor', data: { label: 'Nodes bg color' } },
     { blockId: nextId(idPrefixes.node), ...blockPortDefaults, type: 'themeColor', data: { label: 'Theme color' } },

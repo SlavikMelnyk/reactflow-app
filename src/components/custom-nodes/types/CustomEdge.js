@@ -47,7 +47,7 @@ export default function CustomEdge(props) {
               fontWeight: 700,
             }}
           >
-            {id}
+            {`${props.source} to ${props.target}`}
           </div>
       </EdgeLabelRenderer>
     </>
