@@ -15,6 +15,7 @@ import { customNodeTypes, INITIAL_CANVAS_BG_COLOR, getTypeColor, shareOnDnd, cus
 import { usePrevious } from '@/utils/hooks/usePrevious';
 import nextId from 'react-id-generator';
 import Output from './output-bar/Output';
+import CreateEdgeModal from './modals/CreateEdge';
 
 const Canvas = () => {
   const { allBlocks, getBlockByBlockId, canvasBgColor, nodesBgColor, pastedOutputNodes, setPastedOutputNodes } = useContext(AppContext);
@@ -24,6 +25,7 @@ const Canvas = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [outputVisible, setOutputVisible] = useState(false);
+  const [edgeModal, setEdgeModal] = useState();
 
   useEffect(() => {
     setNodes(prev => prev.map(node => {
@@ -67,13 +69,18 @@ const Canvas = () => {
   }, [nodes, prevNodes]);
 
   const onConnect = useCallback((params) => {
+    setEdgeModal(params)
+  }, []);
+
+  const handleSave = (params, label, type, animated) => {
     const { targetHandle, sourceHandle, source, target } = params;
     setEdges(eds =>
       eds.find(edge =>
         (edge.sourceHandle === sourceHandle && edge.source === source) || (targetHandle && edge.targetHandle === targetHandle && edge.target === target))
-        ? eds : addEdge({...params, animated: true, type: 'straight'}, eds)
+        ? eds : addEdge({...params, label:label, animated: animated, type: type}, eds)
     );
-  }, [setEdges]);
+    setEdgeModal(null)
+};
 
   const onDragOver = useCallback((event) => {
     event.preventDefault();
@@ -146,6 +153,7 @@ const Canvas = () => {
             <MiniMap />
           </ReactFlow>
         </div>
+        <CreateEdgeModal params={edgeModal} setEdgeModal={setEdgeModal} onSave={handleSave}/> 
       </ReactFlowProvider>
     </div>
   );

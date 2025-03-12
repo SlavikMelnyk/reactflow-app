@@ -20,6 +20,7 @@ const EditableLabel = ({ initialLabel, id, onSubmit }) => {
 
     return isEditing ? (
         <input
+            className='px-2 bg-white'
             type='text'
             value={label}
             onChange={handleChange}

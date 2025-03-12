@@ -16,6 +16,7 @@ export default function CustomEdge(props) {
     targetY,
     sourcePosition,
     targetPosition,
+    label,
   } = props;
 
   const { setEdges } = useReactFlow();
@@ -32,7 +33,7 @@ export default function CustomEdge(props) {
   return (
     <>
       <BezierEdge {...props} />
-      <EdgeLabelRenderer>
+      {label && <EdgeLabelRenderer>
           <div
             onClick={() =>
                 setEdges((prevEdges) => prevEdges.filter((edge) => edge.id !== id))
@@ -47,9 +48,9 @@ export default function CustomEdge(props) {
               fontWeight: 700,
             }}
           >
-            {`${props.source} to ${props.target}`}
+            {label}
           </div>
-      </EdgeLabelRenderer>
+      </EdgeLabelRenderer>}
     </>
   );
 }
