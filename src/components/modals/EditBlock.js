@@ -13,7 +13,7 @@ const EditBlockModal = ({ element, onSave, onCancel, onRemove }) => {
 
     const [newPortType, setNewPortType] = useState(portTypes.target);
     const [newPortLabel, setNewPortLabel] = useState('');
-    const isVisbleColorChoose = element.type.toLowerCase().includes('color')
+    const isVisbleColorChoose = element?.type?.toLowerCase().includes('color')
 
     const setPortProperty = (portId, property, value) => {
         setPorts(prev => prev.map(port => port.portId === portId ? { ...port, [property]: value } : port));
