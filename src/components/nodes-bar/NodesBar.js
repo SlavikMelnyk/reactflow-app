@@ -1,12 +1,13 @@
 import { AppContext } from '@/contexts/AppContext';
-import { getTypeColor, shareOnDnd } from '@/utils/consts';
+import { blockPortDefaults, getTypeColor, idPrefixes, portTypes, shareOnDnd } from '@/utils/consts';
 import { useContext, useEffect, useMemo, useState } from 'react';
-import { FaEdit } from 'react-icons/fa';
+import { FaEdit, FaPlus } from 'react-icons/fa';
 import EditBlockModal from '../modals/EditBlock';
 import SearchBar from '../common/SearchBar';
+import nextId from 'react-id-generator';
 
 const NodesBar = () => {
-  const { allBlocks, updateBlock, isDarkTheme, removeBlockByBlockId } = useContext(AppContext);
+  const { allBlocks, setAllBlocks, updateBlock, isDarkTheme, removeBlockByBlockId } = useContext(AppContext);
   const [searchValue, setSearchValue] = useState('');
   const [filteredBlocks, setFilteredBlocks] = useState(allBlocks);
   const [editableBlock, setEditableBlock] = useState(null);
@@ -37,7 +38,17 @@ const NodesBar = () => {
       <SearchBar onSearch={setSearchValue} />
       {Object.keys(structuredBlocks).map(type => (
         <div className='my-5' key={type}>
-          <p className={`text-gray-700 text-lg`}>{`Type: ${type}`}</p>
+          <div className='flex justify-between items-center w-full'>
+            <span className={`text-gray-700 text-lg`}>{`Type: ${type}`}</span>
+            {type=== 'custom' && (
+              <FaPlus 
+                className='cursor-pointer h-5 w-5 text-gray-500 mr-2' 
+                onClick={()=>setAllBlocks(prev => [...prev,
+                  { blockId: nextId(idPrefixes.node), ...blockPortDefaults, type: 'custom', data: { label: 'New Node', ports: [] } },  
+                ])}  
+              />
+            )}
+          </div>
           {structuredBlocks[type].map(b => (
             <div 
               key={b.blockId} 
