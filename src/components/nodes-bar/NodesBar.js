@@ -39,7 +39,14 @@ const NodesBar = () => {
         <div className='my-5' key={type}>
           <p className={`text-gray-700 text-lg`}>{`Type: ${type}`}</p>
           {structuredBlocks[type].map(b => (
-            <div key={b.blockId} className={`flex cursor-grab bg-[${getTypeColor(b.type)}] active:cursor-grabbing w-95 h-10 text-gray-700 text-base p-1.5 border-2 border-neutral-500 my-2 rounded-md`} onDragStart={(event) => onDragStart(event, b)} draggable>
+            <div 
+              key={b.blockId} 
+              className={`flex cursor-grab
+                          active:cursor-grabbing w-95 h-10 text-gray-700 text-base p-1.5 border-2 
+                          border-neutral-500 my-2 rounded-md`} 
+              style={{background:b.data.color ? b.data.color : getTypeColor(b.type)}}
+              onDragStart={(event) => onDragStart(event, b)} 
+              draggable>
               <p className='flex-1'>{b.data.label}</p>
               <FaEdit onClick={() => setEditableBlock(b)} className='cursor-pointer h-5 w-5 text-gray-500' />
             </div>

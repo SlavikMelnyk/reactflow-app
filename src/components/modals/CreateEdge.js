@@ -1,14 +1,11 @@
 import { useCallback, useContext, useState } from 'react';
 import { AppContext } from '@/contexts/AppContext';
-import { useReactFlow } from 'reactflow';
 import { ImCheckboxUnchecked, ImCheckboxChecked } from "react-icons/im"
 const CreateEdgeModal = ({ params, setEdgeModal, onSave }) => {
-    const {setEdges} = useReactFlow();
     const { isDarkTheme } = useContext(AppContext);
     const [label, setLabel] = useState('');
     const [edgeType, setEdgeType] = useState('straight');
     const [animated, setAnimated] = useState(false);
-
 
     const handleSave = useCallback(() =>{
         onSave(params, label, edgeType, animated)

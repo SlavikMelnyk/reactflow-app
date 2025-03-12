@@ -35,7 +35,7 @@ const CustomNode = ({ data, children }) => {
                     <Label data={data} />
                 </div>
             )}
-            <div className='realative text-xs flex flex-col justify-evenly -left-1 top-0 h-full'>
+            {leftPorts.length > 0 && <div className='realative text-xs flex flex-col justify-evenly -left-1 top-0 h-full'>
                 <p className='bg-gray-400 flex w-full justify-center'>Targets:</p>
                 {leftPorts.map(({type, id, label = ''}) => (
                     <div className='relative' key={id}>
@@ -50,8 +50,8 @@ const CustomNode = ({ data, children }) => {
                         </div>
                     </div>
                 ))}
-            </div>
-            <div className='realative text-xs flex flex-col justify-evenly -right-0 top-0 h-full'>
+            </div>}
+            {rightPorts.length > 0 && <div className='realative text-xs flex flex-col justify-evenly -right-0 top-0 h-full'>
                 <p className='bg-gray-400 flex w-full justify-center'>Sources:</p>
                 {rightPorts.map(({type, id, label = ''}) => (
                     <div className='relative' key={id}>
@@ -66,7 +66,7 @@ const CustomNode = ({ data, children }) => {
                         </div>
                     </div>
                 ))}
-            </div>
+            </div>}
         </div>
     );
 };

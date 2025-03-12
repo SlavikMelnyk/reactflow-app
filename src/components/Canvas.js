@@ -45,7 +45,7 @@ const Canvas = () => {
           ...block.data,
           ports: newPorts,
         },
-          style: {background: nodesBgColor || getTypeColor(node.type)}
+          style: {background: node.data.color || nodesBgColor || getTypeColor(node.type)}
       };
     }).filter(node => node));
   }, [allBlocks, nodesBgColor, setNodes]);
@@ -54,7 +54,7 @@ const Canvas = () => {
     if(!pastedOutputNodes) return;
     const newEdges = [];
     pastedOutputNodes.forEach(node => (node.edges || []).forEach(edge => newEdges.find(edg => edg.id === edge.id) ? null : newEdges.push(edge)));
-    setNodes(pastedOutputNodes.map(node => ({ ...node, edges: [], style: {background: nodesBgColor || getTypeColor(node.type) }})));
+    setNodes(pastedOutputNodes.map(node => ({ ...node, edges: [], style: {background: node.data.color || nodesBgColor || getTypeColor(node.type) }})));
     setEdges(newEdges);
     setPastedOutputNodes('');
   }, [pastedOutputNodes, setNodes, setEdges, nodesBgColor, setPastedOutputNodes]);
@@ -110,7 +110,7 @@ const Canvas = () => {
       id: nextId(node.blockId+Math.floor(Math.random()*10)),
       position,
       style: {
-        background: nodesBgColor || getTypeColor(node.type),
+        background: node.data.color || nodesBgColor || getTypeColor(node.type),
       },
     };
     setNodes((nds) => nds.concat(newNode));
