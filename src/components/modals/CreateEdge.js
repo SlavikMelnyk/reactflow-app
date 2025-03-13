@@ -10,7 +10,7 @@ const CreateEdgeModal = ({ params, setEdgeModal, onSave }) => {
     const handleSave = useCallback(() =>{
         onSave(params, label, edgeType, animated)
         setLabel('');
-    }, [label, edgeType, animated]);
+    }, [params, label, edgeType, animated]);
 
     if (!params) {
         return null;
@@ -30,6 +30,8 @@ const CreateEdgeModal = ({ params, setEdgeModal, onSave }) => {
                     />
                     <select className='rounded-lg bg-[#666666] px-1 text-[#eeeeee] w-32 h-8' value={edgeType} name='type' onChange={e => setEdgeType(e.target.value)}>
                         <option value='straight'>straight</option>
+                        <option value='step'>step</option>
+                        <option value='smoothstep'>smoothstep</option>
                         <option value='custom'>custom</option>
                     </select>
                 </div>

@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import Label from '../../common/Label';
 import PortWithTooltip from '../../common/PortWithTooltip';
 import EditableLabel from '@/components/common/EditableLabel';
-import { useReactFlow } from 'reactflow';
+import { Position, useReactFlow } from 'reactflow';
 
 const CustomNode = ({ data, children }) => {
     const {setNodes} = useReactFlow();
@@ -46,6 +46,7 @@ const CustomNode = ({ data, children }) => {
                                 label={label}
                                 key={id}
                                 id={id}
+                                position={Position.Left}
                             />
                         </div>
                     </div>
@@ -62,6 +63,7 @@ const CustomNode = ({ data, children }) => {
                                 label={label}
                                 key={id}
                                 id={id}
+                                position={Position.Right}
                             />
                         </div>
                     </div>
