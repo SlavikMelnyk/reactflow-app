@@ -16,6 +16,7 @@ import { usePrevious } from '@/utils/hooks/usePrevious';
 import nextId from 'react-id-generator';
 import Output from './output-bar/Output';
 import CreateEdgeModal from './modals/CreateEdge';
+import ContextMenu from './common/ContextMenu';
 
 const Canvas = () => {
   const { allBlocks, getBlockByBlockId, canvasBgColor, nodesBgColor, pastedOutputNodes, setPastedOutputNodes } = useContext(AppContext);
@@ -26,6 +27,7 @@ const Canvas = () => {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [outputVisible, setOutputVisible] = useState(false);
   const [edgeModal, setEdgeModal] = useState();
+  const [menu, setMenu] = useState(null);
 
   useEffect(() => {
     setNodes(prev => prev.map(node => {
@@ -116,6 +118,26 @@ const Canvas = () => {
     setNodes((nds) => nds.concat(newNode));
   }, [getBlockByBlockId, reactFlowInstance, setNodes, nodesBgColor]);
 
+  const onNodeContextMenu = useCallback(
+    (event, node) => {
+      event.preventDefault();
+      if (node.type?.toLowerCase().includes('color')) {
+        setMenu(null);
+        return;
+      }
+      setMenu({
+        id: node.id,
+        top: event.clientY,
+        left: event.clientX-250,
+      });
+    },
+    [setMenu],
+  );
+
+  const onPaneClick = useCallback(() =>{
+    setMenu(null)
+  }, [setMenu]);
+
   return (
     <div className='dndflow overflow-hidden'>
       <ReactFlowProvider>
@@ -147,10 +169,13 @@ const Canvas = () => {
             onDrop={onDrop}
             onDragOver={onDragOver}
             fitView
+            onNodeContextMenu={onNodeContextMenu}
+            onPaneClick={onPaneClick}
           >
             <Controls />
             <Background variant='dots' />
             <MiniMap />
+            {menu && <ContextMenu onClick={onPaneClick} {...menu} />}
           </ReactFlow>
         </div>
         <CreateEdgeModal params={edgeModal} setEdgeModal={setEdgeModal} onSave={handleSave}/> 
