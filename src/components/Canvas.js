@@ -19,7 +19,7 @@ import CreateEdgeModal from './modals/CreateEdge';
 import ContextMenu from './common/ContextMenu';
 
 const Canvas = () => {
-  const { allBlocks, getBlockByBlockId, canvasBgColor, nodesBgColor, pastedOutputNodes, setPastedOutputNodes } = useContext(AppContext);
+  const { allBlocks, getBlockByBlockId, canvasBgColor, nodesBgColor, pastedOutputNodes, setPastedOutputNodes, snapToGrid } = useContext(AppContext);
   const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const prevNodes = usePrevious(nodes);
@@ -28,6 +28,7 @@ const Canvas = () => {
   const [outputVisible, setOutputVisible] = useState(false);
   const [edgeModal, setEdgeModal] = useState();
   const [menu, setMenu] = useState(null);
+  const snapGrid = [20, 20];
 
   useEffect(() => {
     setNodes(prev => prev.map(node => {
@@ -171,6 +172,8 @@ const Canvas = () => {
             fitView
             onNodeContextMenu={onNodeContextMenu}
             onPaneClick={onPaneClick}
+            snapGrid={snapGrid}
+            snapToGrid={snapToGrid}
           >
             <Controls />
             <Background variant='dots' />

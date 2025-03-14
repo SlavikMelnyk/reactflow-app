@@ -54,8 +54,8 @@ export default function ContextMenu({
         </div>
         <div className='bg-white h-[1px] w-full'/>
         <div className='my-2 flex flex-col gap-1'>
-          <button className='hover:bg-gray-300 w-full' onClick={duplicateNode}>Make a copy</button>
-          <button className='hover:bg-gray-300 w-full' onClick={deleteNode}>Delete node</button>
+          <button className='hover:bg-gray-400 w-full' onClick={duplicateNode}>Make a copy</button>
+          <button className='hover:bg-gray-400 w-full' onClick={deleteNode}>Delete node</button>
         </div>
     </div>
   );

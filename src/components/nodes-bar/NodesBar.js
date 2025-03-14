@@ -2,15 +2,19 @@ import { AppContext } from '@/contexts/AppContext';
 import { blockPortDefaults, getTypeColor, idPrefixes, portTypes, shareOnDnd } from '@/utils/consts';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { FaEdit, FaPlus } from 'react-icons/fa';
+import { IoSettingsOutline, IoSettingsSharp } from "react-icons/io5";
 import EditBlockModal from '../modals/EditBlock';
 import SearchBar from '../common/SearchBar';
 import nextId from 'react-id-generator';
+import Setting from '../SettingBar/Setting';
 
 const NodesBar = () => {
   const { allBlocks, setAllBlocks, updateBlock, isDarkTheme, removeBlockByBlockId } = useContext(AppContext);
   const [searchValue, setSearchValue] = useState('');
   const [filteredBlocks, setFilteredBlocks] = useState(allBlocks);
   const [editableBlock, setEditableBlock] = useState(null);
+  const [settingHover, setSettingHover] = useState(false);
+  const [outputVisible, setOutputVisible] = useState(false);
 
   const structuredBlocks = useMemo(() => filteredBlocks.reduce((acc, block) => ({ ...acc, [block.type]: [ ...acc[block.type] || [], block ] }), {}), [filteredBlocks]);
 
@@ -64,12 +68,21 @@ const NodesBar = () => {
           ))}
         </div>
       ))}
-      <button
-        className='relative top-2 px-8 py-2 text-base bg-gray-600 text-white font-bold rounded-lg ml-2 mb-2 left-24'
-        onClick={() => setEditableBlock({})}
-      >
-        Add new
-      </button>
+      <div className='flex justify-between items-center'>
+        <div className='w-fit' onMouseEnter={()=>setSettingHover(true)} onMouseLeave={()=> setSettingHover(false)}>
+          {settingHover ? 
+          <IoSettingsSharp className='cursor-pointer h-8 w-8 text-gray-500' onClick={() => setOutputVisible(true)} /> :
+          <IoSettingsOutline className='cursor-pointer h-8 w-8 text-gray-500' onClick={() => setOutputVisible(true)} />
+          }
+        </div>
+        <button
+          className='px-8 py-2 text-base bg-gray-600 text-white font-bold rounded-lg'
+          onClick={() => setEditableBlock({})}
+        >
+          Add new
+        </button>
+      </div>
+      <Setting nodes={[]} edges={[]} visible={outputVisible} hide={() => setOutputVisible(false)} />
       {editableBlock ? (
         <EditBlockModal
           element={editableBlock}

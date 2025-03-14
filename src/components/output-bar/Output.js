@@ -33,7 +33,7 @@ const Output = ({visible, hide, nodes, edges}) => {
                     <FaPaste className='h-5 w-5 text-gray-500' />
                 </div>
                 <input
-                    className='form-input py-3 text-base pl-10 block w-full rounded-md bg-gray rounded-md'
+                    className='form-input py-3 text-base pl-10 block w-full bg-gray rounded-md'
                     type='text'
                     value={pastedOutput}
                     onChange={e => setPastedOutput(e.target.value)}

@@ -10,6 +10,7 @@ const AppContextProvider = ({ children }) => {
     const [nodesBgColor, setNodesBgColor] = useState(null);
     const [pastedOutputNodes, setPastedOutputNodes] = useState([]);
     const [allBlocks, setAllBlocks] = useState(getInitialBlocks());
+    const [snapToGrid, setSnapToGrid] = useState(false);
   
     const getBlockByBlockId = useCallback(blockId => allBlocks.find(b => b.blockId === blockId), [allBlocks]);
 
@@ -38,6 +39,8 @@ const AppContextProvider = ({ children }) => {
         setNodesBgColor,
         pastedOutputNodes,
         setPastedOutputNodes,
+        snapToGrid,
+        setSnapToGrid,
     }), [
       allBlocks,
       setAllBlocks,
@@ -52,6 +55,8 @@ const AppContextProvider = ({ children }) => {
       setNodesBgColor,
       pastedOutputNodes,
       setPastedOutputNodes,
+      snapToGrid,
+      setSnapToGrid,
     ]);
   
     return (
